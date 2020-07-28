@@ -1,4 +1,4 @@
-const {Cart} = require(`../models`)
+const {Cart, Product} = require(`../models`)
 
 class CartController {
 
@@ -27,6 +27,7 @@ class CartController {
         let newCart = {
             UserId: req.user.id,
             ProductId: req.params.id,
+            quantity: req.body.quantity,
             status: false
         }
         Cart.create(newCart)
@@ -73,6 +74,19 @@ class CartController {
             } else {
                 res.status(200).json({message: `Successfully delete all items from cart!`})
             }
+        })
+        .catch((err) => {
+            next(err)
+        })
+    }
+
+    static editStock(req, res, next) {
+        let id = req.body.ProductId
+        let cartQuantity = req.body.quantity
+
+        Product.decrement({stock: cartQuantity}, {where: {id}})
+        .then((result) => {
+            res.status(200).json(result[0][0][0])
         })
         .catch((err) => {
             next(err)

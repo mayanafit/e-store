@@ -3,6 +3,7 @@ const CartController = require(`../controllers/CartController`)
 
 router.get(`/`, CartController.read)
 router.delete(`/`, CartController.deleteAll)
+router.put(`/`, CartController.editStock)
 router.post(`/:id`, CartController.add)
 router.delete(`/:id`, CartController.delete)
 

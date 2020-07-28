@@ -30,7 +30,7 @@ class UserController {
             if (result && comparePass(password, result.password)) {
                 let {id, name, email, role} = result
                 let access_token = encode({id, name, email, role})
-                res.status(200).json({access_token})
+                res.status(200).json({access_token, name, role})
             } else {
                 throw error
             }
