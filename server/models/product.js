@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.belongsToMany(models.User, { through: models.Cart });
+      Product.belongsTo(models.Banner)
     }
 
     static generateForm(data) {
@@ -19,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         image_url: data.image_url,
         price: +data.price,
         stock: +data.stock,
-        category: data.category
+        category: data.category,
+        BannerId: +data.BannerId
       }
 
       return obj
@@ -116,7 +119,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Category must be provided!`
         }
       } 
-    }
+    },
+    BannerId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',

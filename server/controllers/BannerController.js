@@ -3,7 +3,7 @@ const {Banner} = require(`../models`)
 class BannerController {
 
     static read(req, res, next) {
-        Banner.findAll({order: [['createdAt', 'ASC']]})
+        Banner.findAll({include: `Products`, order: [['createdAt', 'ASC']]})
         .then(result => {
             res.status(200).json(result)
         })
