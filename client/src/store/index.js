@@ -74,7 +74,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           const error = err.response.data.message;
-          console.log(error);
+          // console.log(error);
           swal('Error', `${error}`, 'error');
         });
     },
@@ -95,8 +95,14 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           const errors = err.response.data;
-          console.log(errors);
-          swal('Error!', `${errors.message}`, 'error');
+          let message;
+          if (Array.isArray(errors.message)) {
+            message = errors.message.join(', ');
+            // console.log(message, `ini message`)
+          } else {
+            message = errors.message;
+          }
+          swal('Error!', `${message}`, 'error');
         });
     },
     showProducts(context) {
@@ -108,12 +114,12 @@ export default new Vuex.Store({
         },
       })
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           context.commit('SET_PRODUCTS', result.data);
         })
-        .catch((err) => {
-          const error = err.response.data.message;
-          console.log(error);
+        .catch(() => {
+          // const error = err.response.data.message;
+          // console.log(error);
           swal('Error!', 'Something went wrong.', 'error');
         });
     },
@@ -126,12 +132,12 @@ export default new Vuex.Store({
         },
       })
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           context.commit('SET_BANNERS', result.data);
         })
-        .catch((err) => {
-          const error = err.response.data.message;
-          console.log(error);
+        .catch(() => {
+          // const error = err.response.data.message;
+          // console.log(error);
           swal('Error!', 'Something went wrong.', 'error');
         });
     },
@@ -167,7 +173,7 @@ export default new Vuex.Store({
           swal('Success!', 'Success adding product to cart!', 'success');
         })
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           swal('Error!', `${err.response.message}`, 'error');
         });
     },

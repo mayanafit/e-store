@@ -93,7 +93,7 @@ export default {
   created() {
     this.$store.dispatch('showProducts');
     this.$store.dispatch('showBanners');
-    console.log(this.$store.state.products, 'ini products');
+    // console.log(this.$store.state.products, 'ini products');
   },
 };
 </script>
