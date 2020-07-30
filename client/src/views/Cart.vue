@@ -43,11 +43,11 @@ export default {
   },
   created() {
     this.$store.dispatch('showCarts');
-    console.log(this.$store.state.carts, `ini semua`)
+    console.log(this.$store.state.carts, 'ini semua');
   },
   computed: {
     total() {
-      const carts = this.$store.state.carts
+      const { carts } = this.$store.state;
       let totalPrice = 0;
       carts.forEach((element) => {
         totalPrice += (element.quantity * element.Product.price);
@@ -61,21 +61,21 @@ export default {
   },
   methods: {
     checkout() {
-      let data = {
-          ProductId: '',
-          quantity: ''
-        }
-      const carts = this.$store.state.carts
-      carts.forEach(element => {
-        data.ProductId = element.ProductId,
-        data.quantity = element.quantity
-        this.$store.dispatch('editProductStock', data)
-        data.ProductId = ''
-        data.quantity = ''
+      const data = {
+        ProductId: '',
+        quantity: '',
+      };
+      const { carts } = this.$store.state;
+      carts.forEach((element) => {
+        data.ProductId = element.ProductId;
+        data.quantity = element.quantity;
+        this.$store.dispatch('editProductStock', data);
+        data.ProductId = '';
+        data.quantity = '';
       });
-      this.$store.dispatch('deleteAllCarts')
-    }
-  }
+      this.$store.dispatch('deleteAllCarts');
+    },
+  },
 };
 </script>
 

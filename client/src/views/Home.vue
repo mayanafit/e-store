@@ -54,7 +54,7 @@ export default {
     },
   },
   created() {
-    this.$store.commit(`SET_STATUS_LOGIN`)
+    this.$store.commit('SET_STATUS_LOGIN');
   },
   methods: {
     logout() {

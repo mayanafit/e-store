@@ -33,14 +33,13 @@ export default {
         return this.$store.getters.electronicProducts;
       } if (!isNaN(this.$route.params.name)) {
         return this.$store.state.filteredProducts;
-      } else {
-        return this.$store.state.products;
       }
+      return this.$store.state.products;
     },
   },
   created() {
     this.$store.dispatch('showProducts');
-  }
+  },
 };
 </script>
 

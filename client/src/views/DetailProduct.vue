@@ -60,29 +60,27 @@ export default {
   },
   methods: {
     addCart() {
-        if(!localStorage.access_token) {
-            Swal.fire(
-            'Please login first.',
-            'We will direct you to our login page.',
-            'warning',
-            );
-            this.$router.push({name: 'Login'})
-        } else {
-            if (this.quantity === 0) {
-              Swal.fire(
-                'Warning!',
-                'Quantity must be more than zero!',
-                'error',
-              );
-            } else {
-              const newCart = {
-                ProductId: this.$store.state.product.id,
-                quantity: this.quantity,
-              };
-              this.$store.dispatch('addCart', newCart);
-            }
-        }
-    }
+      if (!localStorage.access_token) {
+        Swal.fire(
+          'Please login first.',
+          'We will direct you to our login page.',
+          'warning',
+        );
+        this.$router.push({ name: 'Login' });
+      } else if (this.quantity === 0) {
+        Swal.fire(
+          'Warning!',
+          'Quantity must be more than zero!',
+          'error',
+        );
+      } else {
+        const newCart = {
+          ProductId: this.$store.state.product.id,
+          quantity: this.quantity,
+        };
+        this.$store.dispatch('addCart', newCart);
+      }
+    },
   },
 };
 </script>

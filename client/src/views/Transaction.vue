@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import TransactionTable from '../components/TransactionTable.vue';
+// import TransactionTable from '../components/TransactionTable.vue';
 
 export default {
   name: 'Transaction',
-  components: {
-    TransactionTable,
-  },
+//   components: {
+//     TransactionTable,
+//   },
 };
 </script>
 

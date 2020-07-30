@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import router from '../router';
 
 Vue.use(Vuex);
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://desolate-tundra-18530.herokuapp.com';
 
 export default new Vuex.Store({
   state: {
@@ -24,14 +24,14 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_STATUS_LOGIN(state) {
-      if(localStorage.access_token) {
+      if (localStorage.access_token) {
         state.statusLogin = true;
       } else {
-        state.statusLogin = false
+        state.statusLogin = false;
       }
     },
     SET_STATUS_LOGOUT(state, status) {
-      state.statusLogin = status
+      state.statusLogin = status;
     },
     SET_PRODUCTS(state, products) {
       state.products = products.filter((item) => item.stock > 0);
@@ -47,14 +47,14 @@ export default new Vuex.Store({
       router.push({ name: 'AllProducts', params: { name: +params } });
     },
     SET_CARTS(state, carts) {
-      state.carts = carts
+      state.carts = carts;
     },
     DELETE_CART(state, id) {
       state.carts = state.carts.filter((cart) => cart.id !== id);
     },
     RESET_CART(state) {
-      state.carts = []
-    }
+      state.carts = [];
+    },
   },
   actions: {
     processLogin(context, data) {
@@ -86,16 +86,16 @@ export default new Vuex.Store({
           name: user.name,
           email: user.email,
           password: user.password,
-          role: user.role
+          role: user.role,
         },
       })
-        .then((result) => {
-          swal('Success!', `We'll direct you to our login page.`, 'success');
+        .then(() => {
+          swal('Success!', 'We\'ll direct you to our login page.', 'success');
           router.push({ name: 'Login' });
         })
         .catch((err) => {
           const errors = err.response.data;
-          console.log(errors)
+          console.log(errors);
           swal('Error!', `${errors.message}`, 'error');
         });
     },
@@ -162,9 +162,9 @@ export default new Vuex.Store({
           quantity: data.quantity,
         },
       })
-        .then((result) => {
+        .then(() => {
           // console.log(result.data, 'ini hasilnya gaes');
-          swal('Success!', `Success adding product to cart!`, 'success');
+          swal('Success!', 'Success adding product to cart!', 'success');
         })
         .catch((err) => {
           console.log(err.response);
@@ -212,10 +212,10 @@ export default new Vuex.Store({
           access_token: localStorage.access_token,
         },
       })
-        .then((result) => {
+        .then(() => {
           // console.log(result.data)
-          context.commit('RESET_CART')
-          swal('Success!', `Thank you for purchasing at our store!`, 'success');
+          context.commit('RESET_CART');
+          swal('Success!', 'Thank you for purchasing at our store!', 'success');
           // router.push({name: 'Home'})
         })
         .catch(() => {
@@ -231,14 +231,14 @@ export default new Vuex.Store({
         },
         data: {
           ProductId: data.ProductId,
-          quantity: data.quantity
-        }
+          quantity: data.quantity,
+        },
       })
         .then(() => {})
         .catch(() => {
           swal('Error!', 'Something went wrong.', 'error');
         });
-    }
+    },
   },
   modules: {
   },
