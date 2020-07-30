@@ -1,4 +1,4 @@
-const {User} = require(`../models`)
+const {User, Cart} = require(`../models`)
 const {decode} = require(`../helpers/jwt`)
 
 const authentication = (req, res, next) => {
@@ -32,4 +32,30 @@ const authorization = (req, res, next) => {
     }
 }
 
-module.exports = {authentication, authorization}
+const authorizationCustomer = (req, res, next) => {
+    let id = req.params.id
+    let UserId = req.user.id
+    let error = {
+        name: `otherError`,
+        statusCode: 403,
+        message: `Sorry you don't have access to this.`
+    }
+
+    Cart.findByPk(id)
+    .then(data => {
+        if (data) {
+            if (data.UserId === UserId) {
+                next()
+            } else {
+                throw error
+            }
+        } else {
+            next()
+        }
+    })
+    .catch(err => {
+        next(err)
+    })
+}
+
+module.exports = {authentication, authorization, authorizationCustomer}

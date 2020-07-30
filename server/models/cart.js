@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Cart.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     UserId: DataTypes.INTEGER,
     ProductId: DataTypes.INTEGER,
     status: DataTypes.STRING,
@@ -23,15 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        notEmpty: {
-          msg: `Quantity is required!`
-        },
-        notNull: {
-          msg: `Quantity can't be null!`
-        },
-        isNumeric: {
-          msg: `Quantity must be in numbers!`
-        },
         zeroValue(data) {
           if(data < 0) {
             throw new Error(`Quantity can't be less than zero!`)
