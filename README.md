@@ -1,6 +1,24 @@
-# E-Commerce Server
+# E-Store
 
 E-Store is here to help you choose what you need (and perhaps, want). We use RESTful API with JSON formatted responses.
+
+stack server:
+
+Bcrypt
+JWT
+Express
+PostgreSQL
+Sequelize
+
+stack client:
+
+Vue
+Bootstrap
+HTML & CSS
+
+you can check out the demo here https://e-store-24ed0.web.app/
+
+below is e-store formatted server responses:
 
 ## Global Response
 
